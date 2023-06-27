@@ -1,4 +1,4 @@
-import React, {useState, useEffect}  from "react";
+import React from "react";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
@@ -17,16 +17,14 @@ const formControl =
     minWidth: 220,
     backgroundColor: "rgb(255, 255, 255)"
   };
- 
 
 export default function FilterMoviesCard(props) {
 
-     const [genres, setGenres] = useState([{ id: '0', name: "All" }])
-
-     const handleChange = (e, type, value) => {
-          e.preventDefault()
-          props.onUserInput(type, value)   // NEW
-        }
+  const genres = [
+    {id: 1, name: "Animation"},
+    {id: 2, name: "Comedy"},
+    {id: 3, name: "Thriller"}
+  ]
 
   return (
     <Card 
