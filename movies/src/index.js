@@ -7,18 +7,32 @@ import MoviePage from "./pages/movieDetailsPage";
 import FavoriteMoviesPage from "./pages/favoriteMoviesPage"; 
 import MovieReviewPage from "./pages/movieReviewPage";  
 import UpcomingMoviesPage from "./pages/upcomingMoviesPage";
-import SiteHeader from './components/siteHeader'
+import SiteHeader from './components/siteHeader' 
+import { QueryClientProvider, QueryClient } from "react-query";
+import { ReactQueryDevtools } from 'react-query/devtools';
+import { createRoot } from "react-dom/client";
 
 
 
-const App = () => { 
 
+
+const App = () => {
   const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
-
-  return (
-    <BrowserRouter>
-    <SiteHeader /> 
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 360000,
+        refetchInterval: 360000, 
+        refetchOnWindowFocus: false
+      },
+    },
+  });
+ 
+    return (
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+        <SiteHeader /> 
     <Offset />
     <Routes> 
       <Route path="/movies/upcoming" element={ <UpcomingMoviesPage/> } />
@@ -28,9 +42,15 @@ const App = () => {
       <Route path="/" element={ <HomePage /> } />
       <Route path="*" element={ <Navigate to="/" /> } />
     </Routes>
-  </BrowserRouter>
+        </BrowserRouter>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+    );
+  };
+  
 
-  );
-};
 
-ReactDOM.render(<App />, document.getElementById("root"));
+
+const rootElement = createRoot( document.getElementById("root") )
+rootElement.render(<App />);
+
