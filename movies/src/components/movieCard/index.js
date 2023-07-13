@@ -13,15 +13,26 @@ import CalendarIcon from "@mui/icons-material/CalendarTodayTwoTone";
 import StarRateIcon from "@mui/icons-material/StarRate";
 import IconButton from "@mui/material/IconButton";
 import Grid from "@mui/material/Grid";
-import img from '../../images/film-poster-placeholder.png'
+import img from '../../images/film-poster-placeholder.png' 
+import React, { useContext  } from "react";
+import { MoviesContext } from "../../contexts/moviesContext";
 
-export default function MovieCard(props) {
-  const movie = props.movie; 
+
+export default function MovieCard({ movie }) { 
+
+  const { favorites, addToFavorites } = useContext(MoviesContext);
+
+  if (favorites.find((id) => id === movie.id)) {
+    movie.favorite = true;
+  } else {
+    movie.favorite = false
+  }
 
   const handleAddToFavorite = (e) => {
-     e.preventDefault();
-     props.selectFavorite(movie.id);
-   };
+    e.preventDefault();
+    addToFavorites(movie);
+  };
+
  
   return (
     <Card sx={{ maxWidth: 345 }}>
@@ -79,3 +90,4 @@ export default function MovieCard(props) {
     </Card>
   );
 }
+
