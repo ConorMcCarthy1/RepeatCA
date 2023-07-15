@@ -14,15 +14,13 @@ const MoviePage = (props) => {
     ["movie", { id: id }],
     getMovie
   );
-
+console.log(id)
   if (isLoading) {
     return <Spinner />;
   }
-
   if (isError) {
     return <h1>{error.message}</h1>;
   }
-
 
   return (
     <>

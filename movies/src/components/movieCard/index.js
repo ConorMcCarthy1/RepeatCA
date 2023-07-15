@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom"; 
 import Avatar from '@mui/material/Avatar';
-import React from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -18,7 +17,8 @@ import React, { useContext  } from "react";
 import { MoviesContext } from "../../contexts/moviesContext";
 
 
-export default function MovieCard({ movie }) { 
+export default function MovieCard({ movie, action }) {
+
 
   const { favorites, addToFavorites } = useContext(MoviesContext);
 
@@ -76,17 +76,13 @@ export default function MovieCard({ movie }) {
         </Grid>
       </CardContent>
       <CardActions disableSpacing>
-      <IconButton aria-label="add to favorites" onClick={handleAddToFavorite}>
-        <FavoriteIcon color="primary" fontSize="large" />
-    </IconButton>
-
-        <Link to={`/movies/${movie.id}`}>
-          <Button variant="outlined" size="medium" color="primary">
-            More Info ...
-          </Button>
-        </Link>
-
-      </CardActions>
+  {action(movie)}
+  <Link to={`/movies/${movie.id}`}>
+    <Button variant="outlined" size="medium" color="primary">
+      More Info ...${movie.id}
+    </Button>
+  </Link>
+</CardActions>
     </Card>
   );
 }

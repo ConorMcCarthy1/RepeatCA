@@ -1,10 +1,21 @@
 import React from "react";
-import PageTemplate from "../components/templateMovieListPage";
+import PageTemplate from "../components/templateMovieListPage"; 
+import { useEffect, useState } from "react"; 
+import { getUpcomingMovies } from "../api/tmdb-api";
+
+
 
 const UpcomingMoviesPage = (props) => {
-  const toDo = () => true;
+ 
   // Get movies from local storage.
-  const movies = JSON.parse(localStorage.getItem("upcoming")); 
+  
+  const [movies, setMovies] = useState([]);
+  useEffect(() => {
+    getUpcomingMovies().then(movies => {
+      setMovies(movies);
+    });
+  }, []);
+
 
   return (
     <PageTemplate
