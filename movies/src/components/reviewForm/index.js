@@ -10,6 +10,7 @@ import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import { useNavigate } from "react-router-dom";
 
+const ReviewForm = ({ movie }) => {
 
 const context = useContext(MoviesContext);
 
@@ -228,7 +229,8 @@ const ReviewForm = ({ movie }) => {
         </Box>
       </form>
     </Box>
-  );
+  ); 
+  }
 };
 
 export default ReviewForm;
