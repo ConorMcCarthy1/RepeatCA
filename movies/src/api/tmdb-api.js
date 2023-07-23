@@ -13,7 +13,7 @@ export const getMovies = () => {
 };
 
    
-export const getMovie= ({ queryKey }) => {
+export const getMovie = ({ queryKey }) => {
   const [, idPart] = queryKey;
   const { id } = idPart;
   return fetch(
@@ -29,6 +29,16 @@ export const getMovie= ({ queryKey }) => {
       });
 };
    
+export const getSeries = async () => {
+return fetch('https://api.themoviedb.org/3/discover/tv/list?api_key=', +
+process.env.REACT_APP_TMDB_KEY +
+"&language=en-US", getSeries)
+  .then(response => response.json())
+  .then(response => console.log(response))
+  .catch(err => console.error(err)); 
+
+}
+
    export const getGenres = async () => {
     return fetch(
       "https://api.themoviedb.org/3/genre/movie/list?api_key=" +

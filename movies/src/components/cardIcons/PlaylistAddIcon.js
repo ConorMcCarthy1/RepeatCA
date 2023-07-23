@@ -7,9 +7,9 @@ const PlaylistAddIcon = ({ movie }) => {
   const context = useContext(MoviesContext);
 
   const handleAddToPlaylist = (e) => {
-    e.preventDefault();
-    context.PlaylistAddIcon(movie);
-  };
+     e.preventDefault();
+     context.mustWatch(movie);
+   };
 
   return (
     <IconButton aria-label="add to favorites" onClick={handleAddToPlaylist}>
