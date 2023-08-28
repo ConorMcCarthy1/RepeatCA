@@ -1,20 +1,18 @@
 import React from "react";
 import { useParams } from 'react-router-dom';
-import MovieDetails from "../components/movieDetails/";
-import PageTemplate from "../components/templateMoviePage";
+import SeriesDetails from "../components/seriesDetails";
+import TemplateSeriesPage from "../components/templateSeriesPage";
 import { getSeries } from '../api/tmdb-api'
 import { useQuery } from "react-query";
 import Spinner from '../components/spinner'
 
-
-
 const TVPage = (props) => {
-  const { id } = useParams();
+  const { showID } = useParams();
   const { data: series, error, isLoading, isError } = useQuery(
-    ["series", { id: id }],
+    ["series", { id: showID }],
     getSeries
   );
-console.log(id)
+console.log(showID)
   if (isLoading) {
     return <Spinner />;
   }
@@ -26,9 +24,9 @@ console.log(id)
     <>
       {series ? (
         <>
-          <PageTemplate series={series}>
-            <MovieDetails series={series} />
-          </PageTemplate>
+          <TemplateSeriesPage series={series}>
+            <SeriesDetails series={series} />
+          </TemplateSeriesPage>
         </>
       ) : (
         <p>Waiting for series details</p>

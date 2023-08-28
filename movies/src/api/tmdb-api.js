@@ -12,7 +12,6 @@ export const getMovies = () => {
   });
 };
 
-   
 export const getMovie = ({ queryKey }) => {
   const [, idPart] = queryKey;
   const { id } = idPart;
@@ -28,20 +27,56 @@ export const getMovie = ({ queryKey }) => {
           throw error
       });
 };
-   
-export const getSeries = async () => {
-return fetch('https://api.themoviedb.org/3/discover/tv/list?api_key=', +
-process.env.REACT_APP_TMDB_KEY +
-"&language=en-US", getSeries)
-  .then(response => response.json())
-  .then(response => console.log(response))
-  .catch(err => console.error(err)); 
 
-}
+export const getTVShows = () => {
+  return fetch(
+      `https://api.themoviedb.org/3/discover/tv?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US`
+  ).then((response) => {
+      if (!response.ok) {
+          throw new Error(response.json().message);
+      }
+      return response.json();
+  })
+      .catch((error) => {
+          throw error
+      });
+};
+   
+export const getSeries = ({ queryKey }) => {
+  const [, idPart] = queryKey;
+  const { id } = idPart;
+  return fetch(
+      `https://api.themoviedb.org/3/tv/${id}?api_key=${process.env.REACT_APP_TMDB_KEY}`
+  ).then( (response) => {
+      if (!response.ok) {
+          throw new Error(response.json().message);
+      }
+      return response.json();
+  })
+      .catch((error) => {
+          throw error
+      });
+};
 
    export const getGenres = async () => {
     return fetch(
       "https://api.themoviedb.org/3/genre/movie/list?api_key=" +
+        process.env.REACT_APP_TMDB_KEY +
+        "&language=en-US"
+    ).then( (response) => {
+      if (!response.ok) {
+        throw new Error(response.json().message);
+      }
+      return response.json();
+    })
+    .catch((error) => {
+      throw error
+   });
+  }; 
+
+  export const getSeriesGenres = async () => {
+    return fetch(
+      "https://api.themoviedb.org/3/genre/tv/list?api_key=" +
         process.env.REACT_APP_TMDB_KEY +
         "&language=en-US"
     ).then( (response) => {
@@ -60,6 +95,35 @@ process.env.REACT_APP_TMDB_KEY +
     const { id } = idPart;
     return fetch(
       `https://api.themoviedb.org/3/movie/${id}/images?api_key=${process.env.REACT_APP_TMDB_KEY}`
+    ).then( (response) => {
+      if (!response.ok) {
+        throw new Error(response.json().message);
+      }
+      return response.json();
+  
+    })
+    .catch((error) => {
+      throw error
+   });
+  };
+  
+   
+   export const getSeriesReviews = (id) => {
+     return fetch(
+       `https://api.themoviedb.org/3/series/${id}/reviews?api_key=${process.env.REACT_APP_TMDB_KEY}`
+     )
+       .then((res) => res.json())
+       .then((json) => {
+         // console.log(json.results);
+         return json.results;
+       });
+   };
+
+  export const getSeriesImages = ({ queryKey }) => {
+    const [, idPart] = queryKey;
+    const { id } = idPart;
+    return fetch(
+      `https://api.themoviedb.org/3/series/${id}/images?api_key=${process.env.REACT_APP_TMDB_KEY}`
     ).then( (response) => {
       if (!response.ok) {
         throw new Error(response.json().message);
