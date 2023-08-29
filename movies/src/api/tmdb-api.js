@@ -42,9 +42,8 @@ export const getTVShows = () => {
       });
 };
    
-export const getSeries = ({ queryKey }) => {
-  const [, idPart] = queryKey;
-  const { id } = idPart;
+export const getSeries =  id  => {
+  
   return fetch(
       `https://api.themoviedb.org/3/tv/${id}?api_key=${process.env.REACT_APP_TMDB_KEY}`
   ).then( (response) => {

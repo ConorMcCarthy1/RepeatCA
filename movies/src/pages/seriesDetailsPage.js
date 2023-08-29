@@ -6,13 +6,13 @@ import { getSeries } from '../api/tmdb-api'
 import { useQuery } from "react-query";
 import Spinner from '../components/spinner'
 
-const TVPage = (props) => {
-  const { showID } = useParams();
+const SeriesDetailsPage = (props) => {
+  const { id } = useParams();
   const { data: series, error, isLoading, isError } = useQuery(
-    ["series", { id: showID }],
+    ["series", { id: id }],
     getSeries
   );
-console.log(showID)
+console.log(id)
   if (isLoading) {
     return <Spinner />;
   }
@@ -35,4 +35,4 @@ console.log(showID)
   );
 };
 
-export default TVPage;
+export default SeriesDetailsPage;
