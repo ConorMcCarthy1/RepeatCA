@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Header from "../headerTVList";
+import Header from "../headerSeriesList";
 import FilterCard from "../filterSeriesCard";
 import SeriesList from "../seriesList";
 import Grid from "@mui/material/Grid"; 

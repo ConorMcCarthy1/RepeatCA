@@ -10,7 +10,6 @@ import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import CalendarIcon from "@mui/icons-material/CalendarTodayTwoTone";
 import StarRateIcon from "@mui/icons-material/StarRate";
-import IconButton from "@mui/material/IconButton";
 import Grid from "@mui/material/Grid";
 import img from '../../images/film-poster-placeholder.png' 
 import React, { useContext  } from "react";
@@ -28,7 +27,7 @@ export default function SeriesCard({ series, action }) {
     series.favorite = false
   }
 
-  const handleAddToFavorite = (e) => {
+  const handleAddToFavoriteSeries = (e) => {
     e.preventDefault();
     addToFavorites(series);
   };
