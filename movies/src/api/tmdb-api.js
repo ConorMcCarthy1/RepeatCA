@@ -40,22 +40,23 @@ export const getTVShows = () => {
       .catch((error) => {
           throw error
       });
+}; 
+
+export const getSeries = () => {
+  return fetch(
+      `https://api.themoviedb.org/3/discover/tv?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US`
+  ).then((response) => {
+      if (!response.ok) {
+          throw new Error(response.json().message);
+      }
+      return response.json();
+  })
+      .catch((error) => {
+          throw error
+      });
 };
    
-export const getSeries =  async id  => {
-  
-  try {
-    const response = await fetch(
-      `https://api.themoviedb.org/3/tv/${id}?api_key=${process.env.REACT_APP_TMDB_KEY}`
-    );
-    if (!response.ok) {
-      throw new Error(response.json().message);
-    }
-    return await response.json();
-  } catch (error) {
-    throw error;
-  }
-};
+
 
    export const getGenres = async () => {
     return fetch(

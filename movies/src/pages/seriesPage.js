@@ -21,13 +21,13 @@ const SeriesPage = (props) => {
   const series = data.results;
 
   // Redundant, but necessary to avoid app crashing.
-  const favorites = series.filter(m => m.favorite)
-  localStorage.setItem('favorites', JSON.stringify(favorites))
+  const watched = series.filter(m => m.watched)
+  localStorage.setItem('watched', JSON.stringify(watched))
   
 
   return (
     <PageTemplate
-      title="Discover Series"
+      title="Discover The Best TV Series"
       series={series}
       action={(series) => {
         return <AddToFavoritesIcon series={series} />

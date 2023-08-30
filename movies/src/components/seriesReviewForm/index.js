@@ -68,7 +68,7 @@ const styles = {
   },
 };
 
-const SeriesForm = ({ series }) => {
+const TVForm = ({ series }) => {
   const [rating, setRating] = useState(3);
 
   const defaultValues = {

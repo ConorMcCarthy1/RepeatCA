@@ -22,15 +22,13 @@ const queryClient = new QueryClient({
       refetchOnWindowFocus: false
     },
   },
-});
-
-
+}); 
 
 const App = () => { 
 
 
   return (
-    <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClient}> 
       <BrowserRouter>
         <SiteHeader />
         <MoviesContextProvider>

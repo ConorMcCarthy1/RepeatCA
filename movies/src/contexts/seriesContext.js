@@ -3,17 +3,17 @@ import React, { useState } from "react";
 export const seriesContext = React.createContext(null);
 
 const SeriesContextProvider = (props) => {
-  const [favorites, setFavorites] = useState( [] )
+  const [watchedSeries, setWatched] = useState( [] )
 
-  const addToFavorites = (series) => {
-    let newFavorites = [];
-    if (!favorites.includes(series.id)){
-      newFavorites = [...favorites, series.id];
+  const addToWatchedSeries = (series) => {
+    let newWatched = [];
+    if (!watchedSeries.includes(series.id)){
+      newWatched = [...watchedSeries, series.id];
     }
     else{
-      newFavorites = [...favorites];
+      newWatched = [...watchedSeries];
     }
-    setFavorites(newFavorites)
+    setWatched(newWatched)
   }; 
 
   const [myReviews, setMyReviews] = useState( {} ) 
@@ -25,8 +25,8 @@ const SeriesContextProvider = (props) => {
   console.log(myReviews);
    
   // We will use this function in a later section
-  const removeFromFavorites = (series) => {
-    setFavorites( favorites.filter(
+  const removeFromWatched = (series) => {
+    setWatched( watchedSeries.filter(
       (mId) => mId !== series.id
     ) )
   };
@@ -34,9 +34,9 @@ const SeriesContextProvider = (props) => {
   return (
     <seriesContext.Provider
       value={{
-        favorites,
-        addToFavorites,
-        removeFromFavorites, 
+        watchedSeries,
+        addToWatchedSeries,
+        removeFromWatched, 
         addReview,
       }}
     >

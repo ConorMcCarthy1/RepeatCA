@@ -1,3 +1,4 @@
+import React, { useContext  } from "react";
 import { Link } from "react-router-dom"; 
 import Avatar from '@mui/material/Avatar';
 import Card from "@mui/material/Card";
@@ -7,39 +8,39 @@ import CardMedia from "@mui/material/CardMedia";
 import CardHeader from "@mui/material/CardHeader";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import FavoriteIcon from "@mui/icons-material/Favorite";
+import  Tv  from "@mui/icons-material/Tv";
 import CalendarIcon from "@mui/icons-material/CalendarTodayTwoTone";
 import StarRateIcon from "@mui/icons-material/StarRate";
 import Grid from "@mui/material/Grid";
 import img from '../../images/film-poster-placeholder.png' 
-import React, { useContext  } from "react";
-import { seriesContext } from "../../contexts/seriesContext";
+
+
 
 
 export default function SeriesCard({ series, action }) {
 
 
-  const { favorites, addToFavorites } = useContext(seriesContext);
+  /*const { watchedSeries, addToWatched } = useContext(seriesContext);
 
-  if (favorites.find((id) => id === series.id)) {
-    series.favorite = true;
+  if (watchedSeries.find((id) => id === series.id)) {
+    series.watched = true;
   } else {
-    series.favorite = false
+    series.watched = false
   }
 
-  const handleAddToFavoriteSeries = (e) => {
+  const handleAddToWatchedSeries = (e) => {
     e.preventDefault();
-    addToFavorites(series);
+    addToWatched(series);
   };
 
- 
+ */
   return (
     <Card sx={{ maxWidth: 345 }}>
             <CardHeader
         avatar={
-          series.favorite ? (
+          series? (
             <Avatar sx={{ backgroundColor: 'red' }}>
-              <FavoriteIcon />
+            <Tv/>
             </Avatar>
           ) : null
         }
@@ -63,7 +64,7 @@ export default function SeriesCard({ series, action }) {
           <Grid item xs={6}>
             <Typography variant="h6" component="p">
               <CalendarIcon fontSize="small" />
-              {series.release_date}
+              {series.first_air_date}
             </Typography>
           </Grid>
           <Grid item xs={6}>
