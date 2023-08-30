@@ -1,15 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import Chip from "@mui/material/Chip";
 import Paper from "@mui/material/Paper";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import { StackedLineChart } from "@mui/icons-material";
+import MonetizationIcon from "@mui/icons-material/MonetizationOn";
 import StarRate from "@mui/icons-material/StarRate";
 import NavigationIcon from "@mui/icons-material/Navigation";
 import Fab from "@mui/material/Fab";
-import Typography from "@mui/material/Typography"; 
-import Drawer from "@mui/material/Drawer";
-import SeriesReviews from "../seriesReviews"
-
+import Typography from "@mui/material/Typography";
 
 
 const root = {
@@ -22,9 +19,8 @@ const root = {
 };
 const chip = { margin: 0.5 };
 
-const SeriesDetails = ({ series }) => {  // Don't miss this!
-  const [drawerOpen, setDrawerOpen] = useState(false);
-  
+const SeriesDetails = ( props) => {
+  const series = props.series
 
   return (
     <>
@@ -50,36 +46,30 @@ const SeriesDetails = ({ series }) => {  // Don't miss this!
         ))}
       </Paper>
       <Paper component="ul" sx={{...root}}>
-        <Chip icon={<AccessTimeIcon />} label={`${series.season_number} Seasons.`} />
+        <Chip icon={<AccessTimeIcon />} label={`${series.runtime} min.`} />
         <Chip
-          icon={<StackedLineChart />}
-          label={`${series.popularity.toLocaleString()}`}
+          icon={<MonetizationIcon />}
+          label={`${series.revenue.toLocaleString()}`}
         />
         <Chip
           icon={<StarRate />}
           label={`${series.vote_average} (${series.vote_count}`}
         />
-        <Chip label={`First aired: ${series.first_air_date}`} />
+        <Chip label={`Released: ${series.release_date}`} />
       </Paper>
-           <Fab
+      <Fab
         color="secondary"
         variant="extended"
-        onClick={() =>setDrawerOpen(true)}
         sx={{
-          position: 'fixed',
-          bottom: '1em',
-          right: '1em'
+            position: "fixed",
+            bottom: 2,
+            right: 2
         }}
       >
         <NavigationIcon />
         Reviews
       </Fab>
-      <Drawer anchor="top" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
-        <SeriesReviews series={series} />
-      </Drawer>
-       
-    
       </>
   );
 };
-export default SeriesDetails;
+export default SeriesDetails ;

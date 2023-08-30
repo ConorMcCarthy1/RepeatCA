@@ -1,28 +1,19 @@
-import React from "react";
-import SeriesHeader from "../cardIcons/seriesHeader";
+import React, { useState, useEffect } from "react";
+import SeriesHeader from "../seriesHeader";
 import Grid from "@mui/material/Grid";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
-import { getSeriesImages } from "../../api/tmdb-api"; 
-import { useQuery } from "react-query";
-import Spinner from '../spinner'
-
+import { getSeriesImages } from "../../api/tmdb-api";
 
 const TemplateSeriesPage = ({ series, children }) => {
-  const { data , error, isLoading, isError } = useQuery(
-    ["images", { id: series.id }, ""],
-    getSeriesImages
-  );
+  const [images, setImages] = useState([]);
 
-  if (isLoading) {
-    return <Spinner />;
-  }
-
-  if (isError) {
-    return <h1>{error.message}</h1>;
-  }
-  const images = data.posters 
-
+  useEffect(() => {
+    getSeriesImages(series.id).then((images) => {
+      setImages(images);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>

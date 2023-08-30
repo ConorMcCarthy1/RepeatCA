@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import SeriesHeaderList from "../headerSeriesList";
-import FilterCard from "../filterSeriesCard";
+import FilterSeriesCard from "../filterSeriesCard";
 import SeriesList from "../seriesList";
 import Grid from "@mui/material/Grid"; 
 
@@ -31,7 +31,7 @@ function SeriesListPageTemplate({ series, title, action }) {
       </Grid>
       <Grid item container spacing={5}>
         <Grid key="find" item xs={12} sm={6} md={4} lg={3} xl={2}>
-          <FilterCard
+          <FilterSeriesCard
             onUserInput={handleChange}
             titleFilter={nameFilter}
             genreFilter={genreFilter}

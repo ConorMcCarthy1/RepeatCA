@@ -1,6 +1,4 @@
-import React, { useContext  } from "react";
-import { Link } from "react-router-dom"; 
-import Avatar from '@mui/material/Avatar';
+import React from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -8,49 +6,18 @@ import CardMedia from "@mui/material/CardMedia";
 import CardHeader from "@mui/material/CardHeader";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import  Tv  from "@mui/icons-material/Tv";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import CalendarIcon from "@mui/icons-material/CalendarTodayTwoTone";
 import StarRateIcon from "@mui/icons-material/StarRate";
+import IconButton from "@mui/material/IconButton";
 import Grid from "@mui/material/Grid";
-import img from '../../images/film-poster-placeholder.png' 
+import img from '../../images/film-poster-placeholder.png'
 
-
-
-
-export default function SeriesCard({ series, action }) {
-
-
-  /*const { watchedSeries, addToWatched } = useContext(seriesContext);
-
-  if (watchedSeries.find((id) => id === series.id)) {
-    series.watched = true;
-  } else {
-    series.watched = false
-  }
-
-  const handleAddToWatchedSeries = (e) => {
-    e.preventDefault();
-    addToWatched(series);
-  };
-
- */
+export default function SeriesCard(props) {
+  const series = props.series;
   return (
     <Card sx={{ maxWidth: 345 }}>
-            <CardHeader
-        avatar={
-          series? (
-            <Avatar sx={{ backgroundColor: 'red' }}>
-            <Tv/>
-            </Avatar>
-          ) : null
-        }
-        title={
-          <Typography variant="h5" component="p">
-            {series.title}{" "}
-          </Typography>
-        }
-      />
-
+      <CardHeader title={series.title} />
       <CardMedia
         sx={{ height: 500 }}
         image={
@@ -64,7 +31,7 @@ export default function SeriesCard({ series, action }) {
           <Grid item xs={6}>
             <Typography variant="h6" component="p">
               <CalendarIcon fontSize="small" />
-              {series.first_air_date}
+              {series.release_date}
             </Typography>
           </Grid>
           <Grid item xs={6}>
@@ -76,13 +43,13 @@ export default function SeriesCard({ series, action }) {
         </Grid>
       </CardContent>
       <CardActions disableSpacing>
-  {action(series)}
-  <Link to={`/series/${series.id}`}>
-    <Button variant="outlined" size="medium" color="primary">
-      More Info ...${series.id}
-    </Button>
-  </Link>
-</CardActions>
+        <IconButton aria-label="add to favorites" onClick={null}>
+          <FavoriteIcon color="primary" fontSize="large" />
+        </IconButton>
+        <Button variant="outlined" size="medium" color="primary">
+          More Info ...
+        </Button>
+      </CardActions>
     </Card>
   );
 }

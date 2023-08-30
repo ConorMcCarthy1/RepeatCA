@@ -1,38 +1,57 @@
 import React from "react";
-import { useParams } from 'react-router-dom';
-import SeriesDetails from "../components/seriesDetails";
-import TemplateSeriesPage from "../components/templateSeriesPage";
-import { getSeries } from '../api/tmdb-api'
-import { useQuery } from "react-query";
-import Spinner from '../components/spinner'
+import SeriesHeader from "../components/seriesHeader";
+import SeriesDetails from "../components/seriesDetails/";
+import Grid from "@mui/material/Grid";
+import ImageList from "@mui/material/ImageList";
+import ImageListItem from "@mui/material/ImageListItem";
 
-const SeriesDetailsPage = (props) => {
-  const { id } = useParams();
-  const { data: series, error, isLoading, isError } = useQuery(
-    ["series", { id: id }],
-    getSeries
-  );
-console.log(id)
-  if (isLoading) {
-    return <Spinner />;
-  }
-  if (isError) {
-    return <h1>{error.message}</h1>;
-  }
+const SeriesPage = (props) => {
+  const series = props.series;
+  const images = props.images;
 
   return (
     <>
       {series ? (
         <>
-          <TemplateSeriesPage series={series}>
-            <SeriesDetails series={series} />
-          </TemplateSeriesPage>
+          <SeriesHeader series={series} />
+          <Grid container spacing={5} style={{ padding: "15px" }}>
+            <Grid item xs={3}>
+              <div sx={{
+                display: "flex",
+                flexWrap: "wrap",
+                justifyContent: "space-around",
+              }}>
+                <ImageList
+                  cellHeight={500}
+                  sx={{
+                    height: "100vh",
+                  }}
+                  cols={1}
+                >
+                  {images.map((image) => (
+                    <ImageListItem
+                      key={image.file_path}
+                      cols={1}
+                    >
+                      <img
+                        src={`https://image.tmdb.org/t/p/w500/${image}`}
+                        alt={image.poster_path}
+                      />
+                    </ImageListItem>
+                  ))}
+                </ImageList>
+              </div>
+            </Grid>
+            <Grid item xs={9}>
+              <SeriesDetails series={series} />
+            </Grid>
+          </Grid>
         </>
       ) : (
-        <p>Waiting for series details</p>
+        <h2>Waiting for API data</h2>
       )}
     </>
   );
 };
 
-export default SeriesDetailsPage;
+export default SeriesPage;
