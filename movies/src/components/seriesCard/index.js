@@ -11,7 +11,8 @@ import CalendarIcon from "@mui/icons-material/CalendarTodayTwoTone";
 import StarRateIcon from "@mui/icons-material/StarRate";
 import IconButton from "@mui/material/IconButton";
 import Grid from "@mui/material/Grid";
-import img from '../../images/film-poster-placeholder.png'
+import img from '../../images/film-poster-placeholder.png' 
+import  TvIcon from "@mui/icons-material/Tv";
 
 export default function SeriesCard(props) {
   const series = props.series;
@@ -42,7 +43,8 @@ export default function SeriesCard(props) {
           </Grid>
         </Grid>
       </CardContent>
-      <CardActions disableSpacing>
+      <CardActions disableSpacing> 
+      <TvIcon color ="primary"/>
         <IconButton aria-label="add to favorites" onClick={null}>
           <FavoriteIcon color="primary" fontSize="large" />
         </IconButton>
